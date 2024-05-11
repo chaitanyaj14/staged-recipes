@@ -1,0 +1,48 @@
+{% set name = "geoquanta" %}
+{% set version = "0.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/geoquanta-{{ version }}.tar.gz
+  sha256: f9751fd39d33d91e14a6901f18cd2b8e88c021632b562fcb59e7d1fd0c241769
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.8
+    - setuptools >=64
+    - setuptools-scm >=8
+    - pip
+  run:
+    - python >=3.8
+    - numpy
+    - ipyleaflet
+    - pandas
+    - localtileserver
+
+test:
+  imports:
+    - geoquanta
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://chaitanyaj14.github.io/geoquanta
+  summary: A python package for geospatial analysis, offering a wide range of tools and functionalities for working with geographic data.
+  description: A python package for geospatial analysis, offering a wide range of tools and functionalities for working with geographic data.
+  license: MIT
+  license_file: LICENSE
+  dev_url: https://github.com/chaitanyaj14/geoquanta
+
+extra:
+  recipe-maintainers:
+    - chaitanyaj14
